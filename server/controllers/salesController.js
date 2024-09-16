@@ -15,7 +15,6 @@ const getSales = async (req, res) => {
             include: { car: true, user: true },
         };
 
-        // Add date filters if provided
         if (startDate || endDate) {
             query.where.orderDate = {};
 
@@ -27,7 +26,6 @@ const getSales = async (req, res) => {
             }
         }
 
-        // Fetch the orders with the constructed query
         const orders = await prisma.order.findMany(query);
         const totalSales = orders.length;
         const totalRevenue = orders.reduce((sum, order) => sum + order.car.price, 0);

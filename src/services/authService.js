@@ -20,11 +20,16 @@ const logout = () => {
 const getCurrentUser = async () => {
   const response = await axios.get(`${API_URL}/profile`)
   return { user: response.data }
-}
+};
+
+const authStatus = () => {
+  return localStorage.getItem('token');
+};
 
 export const authService = {
   login,
   logout,
   getCurrentUser,
-  register
+  register,
+  authStatus
 };

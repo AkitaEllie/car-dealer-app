@@ -29,7 +29,9 @@ const updateUser = async (req, res) => {
 const deleteUser = async (req, res) => {
     try {
         const { id } = req.params;
-        await prisma.user.delete({ where: { id: parseInt(id) } });
+        await prisma.user.delete({
+            where: { id: parseInt(id) }
+        });
         res.json({ message: 'User deleted successfully' });
     } catch (error) {
         res.status(500).json({ err: 'Failed to delete user', error });

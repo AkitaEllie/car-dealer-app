@@ -6,10 +6,15 @@ const prisma = new PrismaClient({
 const placeOrder = async (req, res) => {
     const { carId, userId, customer, orderDate, status } = req.body;
     try {
-        const getStock = await prisma.cars.findFirst({ where: { id: carId }, select: { stock: true } })
+        const getStock = await prisma.cars.findFirst({
+            where: { id: carId },
+            select: { stock: true }
+        })
         const curStock = getStock.stock
         if (curStock <= 0) {
-            res.status(409).json({ msg: 'out of stock' })
+            res.status(409).json({
+                msg: 'out of stock'
+            })
             return
         }
         const order = await prisma.order.create({

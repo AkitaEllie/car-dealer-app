@@ -8,7 +8,7 @@ const roleMiddleware = (allowedRoles) => (req, res, next) => {
 
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
-            return res.status(403).json({ message: 'Invalid t   oken, expired?', err });
+            return res.status(403).json({ message: 'Invalid token, expired?', err });
         }
 
         if (allowedRoles.includes(decoded.role)) {
